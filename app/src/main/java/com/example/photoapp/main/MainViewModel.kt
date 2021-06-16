@@ -1,28 +1,24 @@
 package com.example.photoapp.main
 
-import android.app.Application
-import androidx.lifecycle.*
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.liveData
 import com.example.photoapp.data.Repository
-import com.example.photoapp.data.remote.UnsplashService
-import com.example.photoapp.data.remote.entity.RandomResult
 import com.example.photoapp.data.remote.entity.Resource
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import java.lang.Exception
+import javax.inject.Inject
 
 const val IMAGE_COUNT = 10
 
-class MainViewModel(private val repository: Repository) : ViewModel() {
+@HiltViewModel
+class MainViewModel @Inject constructor(private val repository: Repository) : ViewModel() {
 
     fun loadRandomImages() = liveData(Dispatchers.IO) {
         emit(Resource.loading(null))
         try {
             val data = repository.getRandomImages(IMAGE_COUNT)
             emit(Resource.success(data))
-        }catch (e: Exception) {
+        } catch (e: Exception) {
             emit(Resource.error(null, e.message ?: "Unknown error"))
         }
     }

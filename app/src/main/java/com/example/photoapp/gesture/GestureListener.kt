@@ -25,7 +25,8 @@ class GestureListener(private val context: Context, private val urls: URL) :
         return true
     }
 
-    fun downloadImage() {
+    // TODO set photo as wallpaper
+    private fun downloadImage() {
 
         val downloadManager = context.getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
 
@@ -39,7 +40,7 @@ class GestureListener(private val context: Context, private val urls: URL) :
                 .setDestinationInExternalPublicDir(
                     Environment.DIRECTORY_DOWNLOADS, downloadUri.lastPathSegment + ".jpg"
                 )
-            Toast.makeText(context,"Downloading...",Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, "Downloading...", Toast.LENGTH_SHORT).show()
             downloadManager.enqueue(request)
         } else {
             Toast.makeText(context, "Write Permission Denied", Toast.LENGTH_SHORT).show()

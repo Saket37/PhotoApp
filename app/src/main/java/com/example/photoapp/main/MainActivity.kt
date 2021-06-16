@@ -13,23 +13,17 @@ import androidx.core.content.ContextCompat
 import androidx.viewpager2.widget.ViewPager2
 import com.example.photoapp.R
 import com.example.photoapp.adapter.ViewPagerAdapter
-import com.example.photoapp.data.Repository
-import com.example.photoapp.data.remote.UnsplashService
 import com.example.photoapp.data.remote.entity.Status
 import com.example.photoapp.external.LinePagerIndicator
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     lateinit var viewPager: ViewPager2
     lateinit var progressBar: ProgressBar
     lateinit var pagerAdapter: ViewPagerAdapter
 
-    private val mainViewModel: MainViewModel by viewModels {
-        MainViewModelFactory(
-            Repository(
-                UnsplashService.getService()
-            )
-        )
-    }
+    private val mainViewModel: MainViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
 

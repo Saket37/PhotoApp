@@ -6,8 +6,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.photoapp.R
 import com.example.photoapp.data.remote.entity.RandomResult
 import com.example.photoapp.holder.ViewPagerHolder
+import javax.inject.Inject
 
-class ViewPagerAdapter : RecyclerView.Adapter<ViewPagerHolder>() {
+class ViewPagerAdapter @Inject constructor() : RecyclerView.Adapter<ViewPagerHolder>() {
     var randomImages: List<RandomResult> = emptyList()
         set(value) {
             field = value
